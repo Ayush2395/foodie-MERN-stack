@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./components/head.ejs') %>
+  <body>
+    <%- include('./components/navbar.ejs') %>
+    <div
+      class="container d-flex justify-content-center align-items-center"
+      style="min-height: 100vh"
+    >
+      <div class="w-100" style="max-width: 400px">
+        <div class="card">
+          <div class="card-body">
+            <div class="card-title display-4 fw-normal">Signup</div>
+            <form>
+              <div class="form-group mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="email"
+                  name="email"
+                />
+                <div class="email error"></div>
+              </div>
+              <div class="form-group mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  name="password"
+                />
+                <div class="password error"></div>
+              </div>
+              <button class="btn btn-success w-100">Signup</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.querySelector("form");
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        // validate the value
+        const email = form.email.value;
+        const password = form.password.value;
+
+        // send the data to the endpoint
+        const result = await fetch("/signup", {
+          method: "POST",
+          body: JSON.stringify({ email, password }),
+          headers: { "Content-Type": "application/json" },
+        });
+      });
+    </script>
+  </body>
+</html>
